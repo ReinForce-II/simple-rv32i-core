@@ -165,7 +165,7 @@ always @ (posedge clk) begin
                     pc <= ALU(GET_XREG(i_rs1), {{12{i_jimm[20]}}, i_jimm[19:0]}, `ALU_OP_ADD);
                 end
                 `INST_PATTERN_BRANCH:   begin
-                    pc <= BALU(GET_XREG(i_rs1), GET_XREG(i_rs2), i_fun3) ? pc + {{20{i_bimm[12]}}, i_bimm[11:0]} : pc + 4;
+                    pc <= BALU(GET_XREG(i_rs1), GET_XREG(i_rs2), i_fun3) ? pc + {{20{i_bimm[12]}}, i_bimm[11:0]} - 4: pc;
                 end
                 `INST_PATTERN_LOAD:     begin
                     if (sub_stage == 0) begin
